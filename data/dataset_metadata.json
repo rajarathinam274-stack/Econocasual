@@ -1,0 +1,24 @@
+{
+  "dataset_id": 352,
+  "name": "Online Retail",
+  "source_page": "https://archive.ics.uci.edu/dataset/352/online+retail",
+  "download_url": "https://archive.ics.uci.edu/static/public/352/online+retail.zip",
+  "doi": "10.24432/C5BW33",
+  "citation": "Chen, D. (2015). Online Retail [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5BW33.",
+  "license": {
+    "name": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "description": "Transaction-level records from a UK-based online retailer, covering 1 December 2010 through 9 December 2011. These are observed transactions, not a complete record of prices shown to customers who did not buy.",
+  "expected_columns": [
+    "InvoiceNo",
+    "StockCode",
+    "Description",
+    "Quantity",
+    "InvoiceDate",
+    "UnitPrice",
+    "CustomerID",
+    "Country"
+  ],
+  "raw_data_committed_to_git": false
+}
