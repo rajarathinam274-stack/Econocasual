@@ -13,7 +13,7 @@ import pandas as pd
 
 
 def _column_map(data: pd.DataFrame) -> dict[str, Any]:
-    return {str(c).strip().lower().replace(" ", ""): c for c in data.columns}
+    return {str(c).strip().lower().replace(" ", "").replace("_", ""): c for c in data.columns}
 
 
 def summarize_transactions(data: pd.DataFrame, top_n: int = 10) -> dict[str, Any]:
