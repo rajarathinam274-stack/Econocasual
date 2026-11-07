@@ -27,3 +27,16 @@ jobs:
         env:
           PYTHONPATH: src:.
         run: pytest -q
+      - name: Run reproducibility smoke pipeline
+        env:
+          PYTHONPATH: src:.
+        run: |
+          python scripts/reproducibility_smoke.py tests/fixtures/smoke_transactions.csv --output-dir outputs/ci-smoke
+          python - <<'PY'
+          import json
+          report = json.load(open('outputs/ci-smoke/manifest.json', encoding='utf-8'))
+          assert report['raw_rows'] == 5
+          assert report['positive_sales_rows'] == 4
+          assert report['scenario_rows'] == 4
+          assert report['eda_revenue'] == 29.0
+          PY
