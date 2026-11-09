@@ -1,6 +1,7 @@
 """Download and extract a dataset described by repository metadata."""
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from urllib.request import urlopen
@@ -41,6 +42,7 @@ def download_dataset(
     with urlopen(str(metadata["download_url"]), timeout=timeout) as response:
         archive_path.write_bytes(response.read())
 
+    archive_sha256 = hashlib.sha256(archive_path.read_bytes()).hexdigest()
     root = output.resolve()
     extracted: list[str] = []
     with zipfile.ZipFile(archive_path) as archive:
@@ -54,6 +56,7 @@ def download_dataset(
     return {
         "dataset": metadata["name"],
         "archive": str(archive_path),
+        "archive_sha256": archive_sha256,
         "output_dir": str(output),
         "extracted_files": extracted,
         "source_page": metadata["source_page"],

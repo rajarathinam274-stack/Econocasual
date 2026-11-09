@@ -1,3 +1,4 @@
+import hashlib
 import json
 from pathlib import Path
 from zipfile import ZipFile
@@ -33,6 +34,8 @@ def test_download_dataset_extracts_archive_and_returns_provenance(tmp_path):
     assert (tmp_path / "raw" / "dataset.zip").is_file()
     assert (tmp_path / "raw" / "online_retail.csv").read_text() == "Quantity,UnitPrice\n2,5\n"
     assert result["extracted_files"] == ["online_retail.csv"]
+    expected_sha256 = hashlib.sha256((tmp_path / "raw" / "dataset.zip").read_bytes()).hexdigest()
+    assert result["archive_sha256"] == expected_sha256
     assert result["license"]["name"] == "CC BY 4.0"
 
 
